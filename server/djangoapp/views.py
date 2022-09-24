@@ -80,7 +80,7 @@ def registration_request(request):
             # Create user in auth_user table
             user = User.objects.create_user(username=username, password=password, first_name=first_name, last_name=last_name)
             login(request, user)
-            return redirect("djangoapp:get_dealerships")
+            return redirect("djangoapp:index")
         else:
             return render(request, 'onlinecourse/registration.html', context)
 
