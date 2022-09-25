@@ -65,3 +65,19 @@ class CarDealer:
         return "Dealer name: " + self.short_name
 
 # <HINT> Create a plain Python class `DealerReview` to hold review data
+class DealerReview(models.Model):
+    dealership = models.IntegerField()
+    purchase = models.CharField(max_length=30)
+    name = models.CharField(max_length=30)
+    review = models.CharField(max_length=300)
+    purchase_date = models.DateField()
+    car_make = models.ForeignKey(CarMake, on_delete=models.CASCADE)
+    car_model = models.ForeignKey(CarModel, on_delete=models.CASCADE)
+    car_year = models.DateField()
+    SENTIMENTS = (
+        ('neutral', "neutral"),
+        ('positive', "positive"),
+        ('negative', "negative")
+    )
+    sentiment = models.CharField(max_length=9,
+                    choices=SENTIMENTS) 
