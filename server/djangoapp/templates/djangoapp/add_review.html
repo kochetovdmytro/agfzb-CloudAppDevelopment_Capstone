@@ -12,5 +12,38 @@
 </head>
     <body>
     <!--Add review form here -->
+    <form action="{% url "djangoapp.views.add_review" %}"  method="post">
+        <input name = "dealerId" type="number"  value = "{{ delaerId }}"" hidden>
+        <div class="form-group">
+          <label for="exampleInputEmail1">Review</label>
+          <input name = "review" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+          <small id="emailHelp" class="form-text text-muted">Stick to our communication rules</small>
+        </div>
+        <div class="form-group">
+          <label for="exampleInputPassword1">Name</label>
+          <input name = "name" type="text" class="form-control" id="exampleInputPassword1" placeholder="Password">
+        </div>
+        <div class="form-group">
+            <label for="exampleInputPassword1">Purchase</label>
+            <input name = "purchase" type="text" class="form-control" id="exampleInputPassword1" placeholder="Password">
+        </div>
+        <div class="form-group">
+            <label for="exampleInputPassword1">Car_make</label>
+            <input name = "car_make" type="text" class="form-control" id="exampleInputPassword1" placeholder="Password">
+        </div>
+        <div class="form-group">
+            <label for="exampleInputPassword1">Car_model</label>
+            <input name = "car_model" type="text" class="form-control" id="exampleInputPassword1" placeholder="Password">
+        </div>
+        <div class="form-group">
+            <label for="exampleInputPassword1">Car_year</label>
+            <input name = "year" type="number" class="form-control" id="exampleInputPassword1" placeholder="Password">
+        </div>
+        <div class="form-group">
+            <label for="exampleInputPassword1">Purchase Date</label>
+            <input name = "purchase_date" type="date" class="form-control" id="exampleInputPassword1" placeholder="Password">
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
     </body>
 </html>
