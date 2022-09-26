@@ -71,8 +71,8 @@ class DealerReview(models.Model):
     name = models.CharField(max_length=30)
     review = models.CharField(max_length=300)
     purchase_date = models.DateField()
-    car_make = models.ForeignKey(CarMake, on_delete=models.CASCADE)
-    car_model = models.ForeignKey(CarModel, on_delete=models.CASCADE)
+    car_make = models.CharField(max_length=30)
+    car_model = models.CharField(max_length=30)
     car_year = models.DateField()
     SENTIMENTS = (
         ('neutral', "neutral"),
