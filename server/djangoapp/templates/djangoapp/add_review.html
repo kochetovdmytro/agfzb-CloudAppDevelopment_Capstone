@@ -12,8 +12,10 @@
 </head>
     <body>
     <!--Add review form here -->
-    <form action="{% url "djangoapp.views.add_review" %}"  method="post">
-        <input name = "dealerId" type="number"  value = "{{ delaerId }}"" hidden>
+    <form action="/djangoapp/dealer/{{ dealerId }}/add_review"  method="post">
+        <!--<input name = "dealerId" type="number"  value = "{{ delaerId }}"" hidden>-->
+        {% csrf_token %}<!--Important do not touch-->
+
         <div class="form-group">
           <label for="exampleInputEmail1">Review</label>
           <input name = "review" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
