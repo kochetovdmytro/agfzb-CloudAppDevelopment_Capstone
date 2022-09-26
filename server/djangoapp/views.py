@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponseRedirect, HttpResponse
 from django.contrib.auth.models import User
 from django.shortcuts import get_object_or_404, render, redirect
-# from .models import related models
+from .models import CarModel
 from .restapis import get_dealers_from_cf, get_dealer_reviews_from_cf, post_request
 from django.contrib.auth import login, logout, authenticate
 from django.contrib import messages
@@ -114,14 +114,15 @@ def get_dealer_details(request, dealer_id):
 # Create a `add_review` view to submit a review
 def add_review(request, dealer_id):
     if request.method == "GET":
-        return render(request, 'djangoapp/add_review.html', {'dealerId':dealer_id})
+        cars = CarModel.objects.filter(dealerId=dealer_id)
+        return render(request, 'djangoapp/add_review.html', {'dealerId':dealer_id, 'cars':cars})
     else:
         if request.user.is_authenticated:
             review = {
                 "name":request.POST["name"],
-                "year":request.POST["year"],
-                "car_model":request.POST["car_model"],
-                "car_make":request.POST["car_make"],
+                "year":request.POST["car"]["year"],
+                "car_model":request.POST["car"]["car_model"],
+                "car_make":request.POST["car"]["car_make"],
                 "purchase":request.POST["purchase"],
                 "review":request.POST["review"],
                 "purchase_date":request.POST["purchase_date"],
@@ -131,7 +132,7 @@ def add_review(request, dealer_id):
             json_payload = {'review' : review}
             response = post_request(url, json_payload)
             print(response)
-            return HttpResponse(response)
+            return redirect("djangoapp:dealer_details", dealer_id=dealer_id)
         else:
             return HttpResponse('Authenticate first')
 
