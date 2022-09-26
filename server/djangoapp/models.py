@@ -70,10 +70,10 @@ class DealerReview(models.Model):
     purchase = models.BooleanField()
     name = models.CharField(max_length=30)
     review = models.CharField(max_length=300)
-    purchase_date = models.DateField()
+    purchase_date = models.CharField(max_length=16)
     car_make = models.CharField(max_length=30)
     car_model = models.CharField(max_length=30)
-    car_year = models.DateField()
+    car_year = models.CharField(max_length=4)
     SENTIMENTS = (
         ('neutral', "neutral"),
         ('positive', "positive"),
