@@ -29,7 +29,7 @@
         <input type="checkbox" id="scales" name="purchasecheck">
         <label for="purchasecheck"><b>Did your purchase from this dealership?</b></label>
         <br>
-        <select name="car" id="car" class="form-select" required >
+        <select name="car" id="car" class="form-select" >
             {% for car in cars %}
                 <option selected value={{car.id}}>{{car.name}}-{{car.car_make}}-{{ car.year|date:"Y" }}</option>
             {% endfor %}
