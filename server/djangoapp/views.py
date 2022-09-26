@@ -116,21 +116,22 @@ def get_dealer_details(request, dealer_id):
 # Create a `add_review` view to submit a review
 def add_review(request, dealer_id):
     if request.method == "GET":
-        return render(request, 'djangoapp/add_review.html')
+        return render(request, 'djangoapp/add_review.html', {'dealerId':dealer_id})
     else:
         if request.user.is_authenticated:
             review = {
-                "name":request.params["name"],
-                "year":request.params["year"],
-                "car_model":request.params["car_model"],
-                "car_make":request.params["car_make"],
-                "purchase":request.params["purchase"],
-                "review":request.params["review"],
-                "purchase_date":request.params["purchase_date"],
+                "name":request.POST["name"],
+                "year":request.POST["year"],
+                "car_model":request.POST["car_model"],
+                "car_make":request.POST["car_make"],
+                "purchase":request.POST["purchase"],
+                "review":request.POST["review"],
+                "purchase_date":request.POST["purchase_date"],
+                "dealership":dealer_id
             }
             url = "https://us-south.functions.appdomain.cloud/api/v1/web/5d65d89d-ae87-46c5-a7b2-bc7f377af4e8/dealership-package/post-review"
             json_payload = {'review' : review}
-            response = post_request(url, json_payload, dealerId=dealer_id)
+            response = post_request(url, json_payload)
             print(response)
             return HttpResponse(response)
         else:
