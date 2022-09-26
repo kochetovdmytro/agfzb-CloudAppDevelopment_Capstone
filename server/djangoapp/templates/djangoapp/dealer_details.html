@@ -10,8 +10,31 @@
     <body>
 
     <!--Add a nav bar here -->
+    <header class="pb-5">
 
+    <nav class=" navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+        <a class=" navbar-brand" href="{% url 'djangoapp:index' %}">Best Cars &#128663;</a>
+        <a class=" navbar-brand" href="{% url 'djangoapp:about' %}">About us</a>
+        <a class=" navbar-brand" href="{% url 'djangoapp:contact' %}">Contact</a>
+
+        {% if user.is_authenticated %}
+        <div class="ml-auto">
+            <a class="h6 mr-2 text-light">Welcome, {{user.username}}</a>
+            <a class="btn btn-outline-danger btn-sm" type="button" href="{% url 'djangoapp:logout' %}">Logout</a>
+        </div> 
+        {% else %}
+        <form action="{% url 'djangoapp:login' %}"  method="post" class="ml-auto">
+            {% csrf_token %}<!--Important do not touch-->
+            <input class="" type="text" id="username" name="username" placeholder="UserName:">
+            <input type="password" id="pword" name="password" placeholder="Password:">
+            <input class="btn btn-outline-success btn-sm" type="submit" value="Login">
+            <a class="btn btn-outline-warning btn-sm" type="submit" href="{% url 'djangoapp:registration' %}">Sign Up</a>
+        </form>
+        {% endif %}
+    </nav>
+</header>
     <!-- Add reviews as cards -->
+    <a href="/djangoapp/dealer/{{dealerId}}/add_review" class="link-primary">Add review</a>
 
     </body>
 
