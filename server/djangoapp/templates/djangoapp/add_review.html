@@ -26,8 +26,8 @@
             <small id="emailHelp" class="form-text text-muted">Stick to our communication rules</small>
         </div>
         <br>
-        <input type="checkbox" id="scales" name="scales"
-        checked>        <label for="purchasecheck"><b>Did your purchase from this dealership?</b></label>
+        <input type="checkbox" id="scales" name="purchasecheck">
+        <label for="purchasecheck"><b>Did your purchase from this dealership?</b></label>
         <br>
         <select name="car" id="car" class="form-select" required >
             {% for car in cars %}
@@ -36,15 +36,11 @@
        </select>
        <div class="form-group">
         <label for="exampleInputEmail1">       Date purchased(mm/dd/yyyy)        </label>
-        <input class="date-own form-control" type="text" name="purchasedate" id="purchasedate">
+        <input class="date-own form-control" type="text" name="purchase_date" id="purchasedate">
         <small id="emailHelp" class="form-text text-muted">Stick to our communication rules</small>
     </div>
         <button type="submit" class="btn btn-primary">Submit</button>
       </form>
     </body>
-    <script type="text/javascript">
-        $('.date-own').datepicker({
-           format: 'mm/dd/yyyy'
-         });
-   </script>
+    
 </html>
