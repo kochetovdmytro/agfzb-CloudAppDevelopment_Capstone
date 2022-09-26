@@ -9,7 +9,7 @@ from django.contrib import messages
 from datetime import datetime
 import logging
 import json
-
+import uuid
 # Get an instance of a logger
 logger = logging.getLogger(__name__)
 
@@ -129,16 +129,18 @@ def add_review(request, dealer_id):
                 review["purchase"]=True
             else:
                 review["purchase"]=False
-            review['year'] = None
+            review['car_year'] = None
             review['car_model'] = None
             review['car_make'] = None
             review['purchase_date'] = None
-
+            review['id'] = uuid.uuid1()[:4]
             if review["purchase"]:
-                car = CarModel.objects.filter(id=int(request.POST['car']))
-                review['year'] = car.year
+                print(request.POST['car'])
+                car = CarModel.objects.get(id=int(request.POST['car']))
+                print(car)
+                review['car_year'] = str(car.year)
                 review['car_model'] = car.name
-                review['car_make'] = car.car_make
+                review['car_make'] = car.car_make.name
                 review['purchase_date'] = request.POST['purchase_date']
             url = "https://us-south.functions.appdomain.cloud/api/v1/web/5d65d89d-ae87-46c5-a7b2-bc7f377af4e8/dealership-package/post-review"
             json_payload = {'review' : review}
