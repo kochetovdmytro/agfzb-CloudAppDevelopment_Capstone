@@ -3,7 +3,7 @@ from django.http import HttpResponseRedirect, HttpResponse
 from django.contrib.auth.models import User
 from django.shortcuts import get_object_or_404, render, redirect
 # from .models import related models
-from .restapis import get_dealers_from_cf, get_dealer_reviews_from_cf
+from .restapis import get_dealers_from_cf, get_dealer_reviews_from_cf, post_request
 from django.contrib.auth import login, logout, authenticate
 from django.contrib import messages
 from datetime import datetime
@@ -114,6 +114,26 @@ def get_dealer_details(request, dealer_id):
         print(reviews_text)
         return HttpResponse(reviews_text)
 # Create a `add_review` view to submit a review
-# def add_review(request, dealer_id):
-# ...
+def add_review(request, dealer_id):
+    if request.method == "GET":
+        return render(request, 'djangoapp/add_review.html')
+    else:
+        if request.user.is_authenticated:
+            review = {
+                "name":request.params["name"],
+                "year":request.params["year"],
+                "car_model":request.params["car_model"],
+                "car_make":request.params["car_make"],
+                "purchase":request.params["purchase"],
+                "review":request.params["review"],
+                "purchase_date":request.params["purchase_date"],
+            }
+            url = "https://us-south.functions.appdomain.cloud/api/v1/web/5d65d89d-ae87-46c5-a7b2-bc7f377af4e8/dealership-package/post-review"
+            json_payload = {'review' : review}
+            response = post_request(url, json_payload, dealerId=dealer_id)
+            print(response)
+            return HttpResponse(response)
+        else:
+            return HttpResponse('Authenticate first')
+
 
