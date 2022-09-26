@@ -67,7 +67,7 @@ class CarDealer:
 # <HINT> Create a plain Python class `DealerReview` to hold review data
 class DealerReview(models.Model):
     dealership = models.IntegerField()
-    purchase = models.CharField(max_length=30)
+    purchase = models.BooleanField()
     name = models.CharField(max_length=30)
     review = models.CharField(max_length=300)
     purchase_date = models.DateField()
