@@ -133,7 +133,7 @@ def add_review(request, dealer_id):
             review['car_model'] = None
             review['car_make'] = None
             review['purchase_date'] = None
-            review['id'] = uuid.uuid1()[:4]
+            review['id'] = uuid.uuid1().int
             if review["purchase"]:
                 print(request.POST['car'])
                 car = CarModel.objects.get(id=int(request.POST['car']))
